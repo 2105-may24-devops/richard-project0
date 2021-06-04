@@ -1,6 +1,7 @@
 import os
 import sys
 from pathlib import Path
+from pathlib import PureWindowsPath
 import datetime
 from blessed import Terminal
 term = Terminal()
@@ -38,6 +39,14 @@ def start():
 def testFirstRun():
     #if Primary, Secondary, and Sys folders, and Global.cl and FL.sys files
     #do not exist already, create them then return
+    '''
+    p = PureWindowsPath('C:/Hawkins_P0')
+
+    if not p:
+        Path.mkdir(p)
+    if not (p + "/Primary"):
+        Path.mkdir(p + "/Primary")
+'''
 
     if not Path("C:/Hawkins_P0").exists():
         Path("C:/Hawkins_P0").mkdir()
@@ -53,6 +62,7 @@ def testFirstRun():
     if not Path("C:/Hawkins_P0/Sys/FL.sy").exists():
         with open("C:/Hawkins_P0/Sys/FL.sy", 'w') as file:
             file.writelines("")
+
     return
 
 def mainMenu():
