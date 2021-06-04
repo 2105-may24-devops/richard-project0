@@ -39,18 +39,18 @@ def testFirstRun():
     #if Primary, Secondary, and Sys folders, and Global.cl and FL.sys files
     #do not exist already, create them then return
 
-    if not os.path.exists("C:/Hawkins_P0"):
-        os.mkdir("C:/Hawkins_P0")
-    if not os.path.exists("C:/Hawkins_P0/Primary"):
-        os.mkdir("C:/Hawkins_P0/Primary")
-    if not os.path.exists("C:/Hawkins_P0/Secondary"):
-        os.mkdir("C:/Hawkins_P0/Secondary")
-    if not os.path.exists("C:/Hawkins_P0/Sys"):
-        os.mkdir("C:/Hawkins_P0/Sys")
-    if not os.path.exists("C:/Hawkins_P0/Sys/Global.cl"):
+    if not Path("C:/Hawkins_P0").exists():
+        Path("C:/Hawkins_P0").mkdir()
+    if not Path("C:/Hawkins_P0/Primary").exists():
+        Path("C:/Hawkins_P0/Primary").mkdir()
+    if not Path("C:/Hawkins_P0/Secondary").exists():
+        Path("C:/Hawkins_P0/Secondary").mkdir()
+    if not Path("C:/Hawkins_P0/Sys").exists():
+        Path("C:/Hawkins_P0/Sys").mkdir()
+    if not Path("C:/Hawkins_P0/Sys/Global.cl").exists():
         with open("C:/Hawkins_P0/Sys/Global.cl", 'w') as file:
             file.writelines("")
-    if not os.path.exists("C:/Hawkins_P0/Sys/FL.sy"):
+    if not Path("C:/Hawkins_P0/Sys/FL.sy").exists():
         with open("C:/Hawkins_P0/Sys/FL.sy", 'w') as file:
             file.writelines("")
     return
