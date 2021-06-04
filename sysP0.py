@@ -6,6 +6,7 @@ import datetime
 from blessed import Terminal
 term = Terminal()
 
+
 def start():
     #give startup message and option to exit
     #if exit selected, exit program
@@ -36,6 +37,7 @@ def start():
             print(term.clear)
             raise SystemExit
    
+
 def testFirstRun():
     #if Primary, Secondary, and Sys folders, and Global.cl and FL.sys files
     #do not exist already, create them then return
@@ -46,7 +48,7 @@ def testFirstRun():
         Path.mkdir(p)
     if not (p + "/Primary"):
         Path.mkdir(p + "/Primary")
-'''
+    '''
 
     if not Path("C:/Hawkins_P0").exists():
         Path("C:/Hawkins_P0").mkdir()
@@ -64,6 +66,7 @@ def testFirstRun():
             file.writelines("")
 
     return
+
 
 def mainMenu():
     #display main menu options, and allow user to select option from list
@@ -90,6 +93,7 @@ def mainMenu():
     #when valid selection made, clear terminal and return selection value
     print(term.white_on_black + term.clear())
     return(selection)
+
 
 def actionFuncCall(act):
     
@@ -129,6 +133,7 @@ def actionFuncCall(act):
         print(term.white_on_black + term.clear)
         SystemExit
 
+
 def addFile(path):
     #add new file to backup
 
@@ -137,6 +142,10 @@ def addFile(path):
 
     #read given path to fp (file path) as a Path type
     fp=Path(path)
+ 
+    #write original file path to FL.sy
+    with open ("C:/Hawkins_P0/Sys/FL.sy", "a") as file:
+        file.writeLine(content=(fp))
 
     #read file at path into contents
     with open(path, "r") as file:
@@ -160,14 +169,16 @@ def addFile(path):
 
     #get current time, convert file path to string format, and generate entry of file creation in Global.cl
     time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    fp=str(fp)   
-    writeLine("C:/Hawkins_P0/Sys/Global.cl", content=(fp +" added on " +time))
+    fp=str(fp)
+    with open ("C:/Hawkins_P0/Sys/Global.cl", "a") as file:
+        file.writeLine(content=(fp +" added on " +time))
     input('Press any key to continue...')
     
     #clear terminal and return
     print(term.clear())
     return
     
+
 def viewGCL():
     #print most recent 5 lines of Global.cl to terminal
 
@@ -192,6 +203,7 @@ def viewGCL():
     print(term.clear())  
     return
  
+ 
 def readLines(path, max_line = 0, min_line = 0):
     #read range of lines from file
     #input file path, minimum line and maximum line numbers to be read/returned
@@ -213,6 +225,7 @@ def readLines(path, max_line = 0, min_line = 0):
         txt = txt[min_line: max_line]
     return txt
 
+
 def countLine(path):
     #count the number of lines in the path file
     
@@ -220,11 +233,13 @@ def countLine(path):
         num_lines = sum(1 for line in file)
     return num_lines
 
+
 def writeLine(path, line_num = 0, content = ""):
     #write content to path file at line line_num, or at end of file.
 
     with open(path, 'a') as tfile:
         tfile.write(content+'\n')
+
 
 def readFolder(path):
     #scan through folder at p_path recursively, and print contents by file path
