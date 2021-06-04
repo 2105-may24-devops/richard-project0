@@ -1,6 +1,7 @@
 import os
 import sys
 from pathlib import Path
+from pathlib import PureWindowsPath
 import datetime
 from blessed import Terminal
 term = Terminal()
@@ -39,20 +40,27 @@ def testFirstRun():
     #if Primary, Secondary, and Sys folders, and Global.cl and FL.sys files
     #do not exist already, create them then return
 
-    if not os.path.exists("C:/Hawkins_P0"):
-        os.mkdir("C:/Hawkins_P0")
-    if not os.path.exists("C:/Hawkins_P0/Primary"):
-        os.mkdir("C:/Hawkins_P0/Primary")
-    if not os.path.exists("C:/Hawkins_P0/Secondary"):
-        os.mkdir("C:/Hawkins_P0/Secondary")
-    if not os.path.exists("C:/Hawkins_P0/Sys"):
-        os.mkdir("C:/Hawkins_P0/Sys")
-    if not os.path.exists("C:/Hawkins_P0/Sys/Global.cl"):
-        with open("C:/Hawkins_P0/Sys/Global.cl", 'w') as file:
-            file.writelines("")
-    if not os.path.exists("C:/Hawkins_P0/Sys/FL.sy"):
-        with open("C:/Hawkins_P0/Sys/FL.sy", 'w') as file:
-            file.writelines("")
+    p = PureWindowsPath('C:/Hawkins_P0')
+
+    if not p:
+        Path.mkdir(p)
+    if not (p + "/Primary"):
+        Path.mkdir(p + "/Primary")
+
+    #if not os.path.exists("C:/Hawkins_P0"):
+    #    os.mkdir("C:/Hawkins_P0")
+    #if not os.path.exists("C:/Hawkins_P0/Primary"):
+    #    os.mkdir("C:/Hawkins_P0/Primary")
+    #if not os.path.exists("C:/Hawkins_P0/Secondary"):
+    #    os.mkdir("C:/Hawkins_P0/Secondary")
+    #if not os.path.exists("C:/Hawkins_P0/Sys"):
+    #    os.mkdir("C:/Hawkins_P0/Sys")
+    #if not os.path.exists("C:/Hawkins_P0/Sys/Global.cl"):
+    #    with open("C:/Hawkins_P0/Sys/Global.cl", 'w') as file:
+    #        file.writelines("")
+   # if not os.path.exists("C:/Hawkins_P0/Sys/FL.sy"):
+    #    with open("C:/Hawkins_P0/Sys/FL.sy", 'w') as file:
+    #        file.writelines("")
     return
 
 def mainMenu():
