@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
-TEST/
-Hawkins_P0/
+./__pycache__/
+./TEST/
+./Hawkins_P0/
 *.py[cod]
 *$py.class
