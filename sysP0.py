@@ -18,27 +18,67 @@ def start():
 
     #print program info and startup confirmation request
         print('Hawkins P0 File Backup System'+'\n')
-        print('Running this program will create folders and files'+'\n'+'in your C: drive if they do not already exist'+'\n')
-    #accept user input        
+
+    #test if necessary files already exist
+    test=test_first_run()
+
+    #if they exist, clear terminal and return to main
+    if test == True:
+        print(term.clear)
+        return
+    
+    #if they do not exist, confirm they should be made
+    else:
+        print('Running this program will create folders and files'+'\n'+'in your drive if they do not already exist'+'\n')
+        #accept user input        
         cont = input('Do you wish to continue? Y/N'+'\n')
 
-    #verify input is valid, if not then request specific input
+        #verify input is valid, if not then request specific input
         while (cont != 'Y' and cont != 'N'):
             cont = input('Please enter either Y or N only'+'\n')
 
-    #if startup confirmed, clear terminal window and run testFirstRun()
+        #if startup confirmed, clear terminal window and run initialize_system(), then return to main
         if cont == 'Y':
             print(term.clear)
-            testFirstRun()
+            initialize_system()
             return
-    #if startup denied, clear terminal and exit system            
+        #if startup denied, clear terminal and exit system            
         if cont == 'N':
             input('Press any key to exit...')
             print(term.clear)
             raise SystemExit
+    return
    
 
-def testFirstRun():
+def test_first_run():
+    #if Primary, Secondary, and Sys folders, and Global.cl and FL.sys files
+    #do not exist already, return false. If they do, return true.
+    '''
+    p = PureWindowsPath('C:/Hawkins_P0')
+
+    if not p:
+        Path.mkdir(p)
+    if not (p + "/Primary"):
+        Path.mkdir(p + "/Primary")
+    '''
+
+    if not Path("Hawkins_P0").exists():
+        return False
+    if not Path("Hawkins_P0/Primary").exists():
+        return False
+    if not Path("Hawkins_P0/Secondary").exists():
+        return False
+    if not Path("Hawkins_P0/Sys").exists():
+        return False
+    if not Path("Hawkins_P0/Sys/Global.cl").exists():
+        return False
+    if not Path("Hawkins_P0/Sys/FL.sy").exists():
+        return False
+
+    return True
+    
+
+def initialize_system():
     #if Primary, Secondary, and Sys folders, and Global.cl and FL.sys files
     #do not exist already, create them then return
     '''
@@ -50,19 +90,19 @@ def testFirstRun():
         Path.mkdir(p + "/Primary")
     '''
 
-    if not Path("C:/Hawkins_P0").exists():
-        Path("C:/Hawkins_P0").mkdir()
-    if not Path("C:/Hawkins_P0/Primary").exists():
-        Path("C:/Hawkins_P0/Primary").mkdir()
-    if not Path("C:/Hawkins_P0/Secondary").exists():
-        Path("C:/Hawkins_P0/Secondary").mkdir()
-    if not Path("C:/Hawkins_P0/Sys").exists():
-        Path("C:/Hawkins_P0/Sys").mkdir()
-    if not Path("C:/Hawkins_P0/Sys/Global.cl").exists():
-        with open("C:/Hawkins_P0/Sys/Global.cl", 'w') as file:
+    if not Path("Hawkins_P0").exists():
+        Path("Hawkins_P0").mkdir()
+    if not Path("Hawkins_P0/Primary").exists():
+        Path("Hawkins_P0/Primary").mkdir()
+    if not Path("Hawkins_P0/Secondary").exists():
+        Path("Hawkins_P0/Secondary").mkdir()
+    if not Path("Hawkins_P0/Sys").exists():
+        Path("Hawkins_P0/Sys").mkdir()
+    if not Path("Hawkins_P0/Sys/Global.cl").exists():
+        with open("Hawkins_P0/Sys/Global.cl", 'w') as file:
             file.writelines("")
-    if not Path("C:/Hawkins_P0/Sys/FL.sy").exists():
-        with open("C:/Hawkins_P0/Sys/FL.sy", 'w') as file:
+    if not Path("Hawkins_P0/Sys/FL.sy").exists():
+        with open("Hawkins_P0/Sys/FL.sy", 'w') as file:
             file.writelines("")
 
     return
@@ -112,26 +152,32 @@ def actionFuncCall(act):
         return        
 
     elif act == 2:
-        pass
+    #update files already in system
+        with open('Hawkins_P0/Sys/FL.sy', 'r') as file:
+            txt = file.readlines()
+            for line in txt:
+                path = line.rstrip()
+                update_file(path)
+            input('Press any key to continue...')
+        return
+
 
     elif act == 3:
     #view global changelog
-        viewGCL()
+        view_file('Hawkins_P0/Sys/Global.cl')
         return
     
     elif act == 4:
     #view files in system
-        #set path
-        path = 'C:\Hawkins_P0\Primary'
-
-        #call readFolder()
-        readFolder(path)
-        return
+        view_file('Hawkins_P0/Sys/FL.sy')
 
     elif act == 5:
     #exit case
         print(term.white_on_black + term.clear)
         SystemExit
+    
+    else:
+        return
 
 
 def addFile(path):
@@ -142,10 +188,10 @@ def addFile(path):
 
     #read given path to fp (file path) as a Path type
     fp=Path(path)
- 
+    
     #write original file path to FL.sy
-    with open ("C:/Hawkins_P0/Sys/FL.sy", "a") as file:
-        file.writeLine(content=(fp))
+    with open ("Hawkins_P0/Sys/FL.sy", 'a') as file:
+        file.writelines(str(fp) + "\n")
 
     #read file at path into contents
     with open(path, "r") as file:
@@ -155,7 +201,7 @@ def addFile(path):
     fn=fp.name
 
     #write contents to new file of same name and extension at C:/Hawins_P0/Primary, confirm when complete
-    with open("C:/Hawkins_P0/Primary/" + fn, 'w') as file:
+    with open("Hawkins_P0/Primary/" + fn, 'w') as file:
         file.writelines(contents)
     print('Primary copy created'+'\n')
 
@@ -163,15 +209,14 @@ def addFile(path):
     fs=fp.stem
 
     #write contents to new file of same name and different extension in C:/Hakwins_P0/Secondary, confirm when complete
-    with open("C:/Hawkins_P0/Secondary/" + fs +".bu", 'w') as file:
+    with open("Hawkins_P0/Secondary/" + fs +".bu", 'w') as file:
         file.writelines(contents)
     print('Secondary copy created'+'\n')
 
     #get current time, convert file path to string format, and generate entry of file creation in Global.cl
     time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    fp=str(fp)
-    with open ("C:/Hawkins_P0/Sys/Global.cl", "a") as file:
-        file.writeLine(content=(fp +" added on " +time))
+    with open ("Hawkins_P0/Sys/Global.cl", 'a') as file:
+        file.writelines(str(fp) + " added on " + time + '\n')
     input('Press any key to continue...')
     
     #clear terminal and return
@@ -179,11 +224,44 @@ def addFile(path):
     return
     
 
-def viewGCL():
-    #print most recent 5 lines of Global.cl to terminal
+def update_file(path):
+    #update file in backup
+    #copy target of path to Primary folder as same type,
+    #and to Secondary folder with .bu suffex, add entry on Global.cl
 
-    #set path
-    path='C:/Hawkins_P0/Sys/Global.cl'
+    #read given path to fp (file path) as a Path type
+    fp=Path(path)
+    
+    #read file at path into contents
+    with open(fp, "r") as file:
+        contents = file.read()
+
+    #truncate file path to file name and extension
+    fn=fp.name
+
+    #write contents to new file of same name and extension at C:/Hawins_P0/Primary, confirm when complete
+    with open("Hawkins_P0/Primary/" + fn, 'w') as file:
+        file.writelines(contents)
+    print('Primary copy created ' + str(fp) + '\n')
+
+    #truncate file path to name only
+    fs=fp.stem
+
+    #write contents to new file of same name and different extension in C:/Hakwins_P0/Secondary, confirm when complete
+    with open("Hawkins_P0/Secondary/" + fs + ".bu", 'w') as file:
+        file.writelines(contents)
+    print('Secondary copy created ' + str(fp) + '\n')
+
+    #get current time, convert file path to string format, and generate entry of file creation in Global.cl
+    time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open ("Hawkins_P0/Sys/Global.cl", 'a') as file:
+        file.writelines(str(fp) +" updated on " +time + '\n')
+
+    return
+
+
+def view_file(path):
+    #print most recent 5 lines of a file to terminal
 
     #get line count of file at path
     max_line = countLine(path)
@@ -192,7 +270,7 @@ def viewGCL():
     content = readLines(path, max_line, (max_line-5))
 
     #provide output desctiption
-    print(term.bright_blue_on_black+'Displaying most recent five entries to the global changelog', end='\n'+'\n')
+    print(term.bright_blue_on_black+'Displaying most recent five entries', end='\n'+'\n')
 
     #display content by line
     print(term.white_on_black)
@@ -232,13 +310,6 @@ def countLine(path):
     with open(path, 'r') as file:
         num_lines = sum(1 for line in file)
     return num_lines
-
-
-def writeLine(path, line_num = 0, content = ""):
-    #write content to path file at line line_num, or at end of file.
-
-    with open(path, 'a') as tfile:
-        tfile.write(content+'\n')
 
 
 def readFolder(path):
