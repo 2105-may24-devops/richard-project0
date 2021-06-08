@@ -1,0 +1,12 @@
+Host batchvm1
+	User richard
+	HostName 13.65.42.214
+	IdentityFile ~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem
+Host batchvm2
+	User richard
+	HostName 104.215.72.107
+	IdentityFile ~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem
+Host batchvm3
+	User richard
+	HostName 20.97.12.217
+	IdentityFile ~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem
