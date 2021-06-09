@@ -1,0 +1,17 @@
+---
+#Richard Hawkins
+#June 9, 2021
+#Uninstall P0
+- name: Uninstall P0
+  hosts: all
+
+  tasks:
+   - name: Delete project0
+     ansible.builtin.file:
+       path: ~/project0
+       state: absent
+
+   - name: Delete venv
+     ansible.builtin.file:
+       path: ~/venv
+       state: absent
