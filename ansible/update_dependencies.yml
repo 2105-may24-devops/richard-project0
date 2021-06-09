@@ -16,7 +16,13 @@
         single_branch: yes
         version: master
         force: yes
-    
-    #update python dependencies using install_reqs.sh
-    - name: Update Dependencies
-      ansible.builtin.script: ~/install_reqs.sh
+
+    - name: Install pip and requirements
+      pip:
+        requirements: ~/project0/requirements.txt
+        virtualenv: ~/venv
+        virtualenv_command: python3 -m venv
+        
+    # #update python dependencies using install_reqs.sh
+    # - name: Update Dependencies
+    #   ansible.builtin.script: ~/install_reqs.sh

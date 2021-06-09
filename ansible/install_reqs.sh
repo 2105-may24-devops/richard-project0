@@ -1,10 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 #Richard Hawkins
 #June 9, 2021
 #install all python dependencies for P0
 
-venv ~/venv
+
+python3 -m venv ~/venv
 source venv/bin/activate
 
 sudo apt update
