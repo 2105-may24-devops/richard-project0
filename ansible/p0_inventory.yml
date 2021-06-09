@@ -1,0 +1,4 @@
+#13.65.42.214 ansible_ssh_private_key_file=~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem ansible_user=richard
+104.215.72.107 ansible_ssh_private_key_file=~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem ansible_user=richard
+#20.97.12.217 ansible_ssh_private_key_file=~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem ansible_user=richard
+#13.84.166.27 ansible_ssh_private_key_file=~/.ssh/2105-may24-devops-ubuntu-vm-1_key.pem ansible_user=richard

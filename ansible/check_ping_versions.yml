@@ -1,0 +1,50 @@
+---
+#Richard Hawkins
+#June 9, 2021
+#check connection to hosts
+- name: Check Connections
+  hosts: all
+
+  tasks:
+    #gather ansible builtin package info
+    - name: Ping
+      ansible.builtin.ping:
+    
+#check versions of resources required for project0
+- name: Check Resource Versions
+  hosts: all
+
+  tasks:
+    #gather ansible builtin package info
+    - name: Gather Package Facts
+      ansible.builtin.package_facts:
+        manager: auto
+    
+    # - name: Print Package Data
+    #   ansible.builtin.debug:
+    #     var: ansible_facts.packages
+
+    #check Python3 version
+    - name: Python3 Version
+      ansible.builtin.debug: #from ...debug->ansible_facts.packages->version->list
+        msg: "python3 version {{ ansible_facts.packages['python3'] | map(attribute='version') | list }} installed"
+      when: "'python3' in ansible_facts.packages"
+      
+    #check Python3-venv version
+    - name: Python3-venv Version
+      ansible.builtin.debug: #from ...debug->ansible_facts.packages->version->list
+        msg: "python3-venv version {{ ansible_facts.packages['python3-venv'] | map(attribute='version') | list }} installed"
+      when: "'python3' in ansible_facts.packages"
+
+    #check Python3-pip ersion
+    - name: Python3-pip Version
+      ansible.builtin.debug: #from ...debug->ansible_facts.packages->version->list
+        msg: "pip version {{ ansible_facts.packages['python3-pip'] | map(attribute='version') | list }} installed"
+      when: "'python3' in ansible_facts.packages"
+
+    #check Git version
+    - name: Git Version
+      ansible.builtin.debug: #from ...debug->ansible_facts.packages->version->list
+        msg: "Git version {{ ansible_facts.packages['git'] | map(attribute='version') | list }} installed"
+      when: "'git' in ansible_facts.packages"
+  

@@ -1,0 +1,22 @@
+---
+#Richard Hawkins
+#June 9, 2021
+#Update all dependencies for P0
+- name: Check/Update Resource Versions
+  hosts: all
+
+
+  tasks:
+    #clone or pull git repo to host
+    - name: Clone/Pull Git Repo
+      ansible.builtin.git:
+        repo: 'https://github.com/2105-may24-devops/richard-project0.git'
+        dest: ~/project0/
+        update: yes
+        single_branch: yes
+        version: master
+        force: yes
+    
+    #update python dependencies using install_reqs.sh
+    - name: Update Dependencies
+      ansible.builtin.script: ~/install_reqs.sh

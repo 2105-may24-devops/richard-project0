@@ -1,0 +1,98 @@
+---
+#Richard Hawkins
+#June 9, 2021
+#Run Hawkins_P0 through test(s)
+- name: Check folder and file states
+  hosts: all
+
+  tasks:
+  - name: Check if ~/venv exists
+    ansible.builtin.file:
+      path: ~/venv
+      state: directory
+
+  - name: Check if ~/project0/Hawkins_P0 exists
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0
+      state: directory
+
+  - name: Check if ~/project0/Hawkins_P0/Primary exists
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Primary
+      state: directory
+
+  - name: Check if ~/project0/Hawkins_P0/Secondary exists
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Secondary
+      state: directory
+
+  - name: Check if ~/project0/Hawkins_P0/Sys exists
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Sys
+      state: directory
+
+  - name: Check if ~/project0/Hawkins_P0/Sys/FL.sy exists
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Sys/FL.sy
+      state: file
+
+  - name: Check if ~/project0/Hawkins_P0/Sys/Global.cl exists
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Sys/Global.cl
+      state: file
+
+  - name: Run P0 test1 script
+    ansible.builtin.script: ~/test1.sh
+
+  - name: Test previous run result
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Primary/example-1.txt
+      state: file
+
+  - name: Run P0 test2 script
+    ansible.builtin.script: ~/test2.sh
+
+  - name: Test previous run result
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Primary/example-2.txt
+      state: file
+
+  - name: Run P0 test3 script
+    ansible.builtin.script: ~/test3.sh
+
+  - name: Test previous run result
+    ansible.builtin.file:
+      path: ~/project0/Hawkins_P0/Primary/example-3.txt
+      state: file
+
+  - name: Run P0 update test script
+    ansible.builtin.script: ~/update_test.sh
+
+  # - name: Delete Test File 1
+  #   ansible.builtin.file:
+  #     path: ~/project0/Hawkins_P0/Primary/example-1.txt
+  #     state: absent
+
+  # - name: Delete Test File 2
+  #   ansible.builtin.file:
+  #     path: ~/project0/Hawkins_P0/Primary/example-2.txt
+  #     state: absent
+
+  # - name: Delete Test File 3
+  #   ansible.builtin.file:
+  #     path: ~/project0/Hawkins_P0/Primary/example-3.txt
+  #     state: absent
+
+
+
+
+    #  # write output of existing log file to variable
+    #  - name: Write Log To Terminal
+    #    shell: cat ~/project0/Hawkins_P0/Sys/FL.sy
+    #    register: output_contents
+
+    #  #check if all files imported
+    #  - name: Check Hawkins_P0.py
+    #    ansible.builtin.debug:
+    #      msg: "{{  }} "
+    #    when: "'python3' in ansible_facts.packages"

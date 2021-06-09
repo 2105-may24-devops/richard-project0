@@ -255,7 +255,7 @@ def update_file(path):
     #get current time, convert file path to string format, and generate entry of file creation in Global.cl
     time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open ("Hawkins_P0/Sys/Global.cl", 'a') as file:
-        file.writelines(str(fp) +" updated on " +time + '\n')
+        file.writelines(str(fp) + " updated on " + time + '\n')
 
     return
 
