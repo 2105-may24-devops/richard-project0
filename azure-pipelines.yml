@@ -76,5 +76,5 @@ DEPM2QxpSyeVfzEcgWb5jVW/hclyRUfXfr90aZHqRYSJ/El00zNZ6jLT'
   inputs:
     ansibleInterface: 'agentMachine'
     playbookPathOnAgentMachine: './ansible/check_ping_versions.yml'
-        inventoriesAgentMachine: 'p0_inventory.yml'
+    inventoriesAgentMachine: 'p0_inventory.yml'
     inventoryFileOnAgentMachine: './ansible/p0_inventory.yml'
