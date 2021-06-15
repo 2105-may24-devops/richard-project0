@@ -38,7 +38,7 @@ steps:
     ansibleInterface: 'agentMachine'
     playbookPathOnAgentMachine: './ansible/check_ping_versions.yml'
     inventoriesAgentMachine: 'file'
-    inventoryFileOnAgentMachine: './ansible/p0_inventory'
+    inventoryFileOnAgentMachine: './ansible/p0_inventory.yml'
   displayName: 'Ansible- Check ping and versions'
   
 - task: Ansible@0
@@ -46,7 +46,7 @@ steps:
     ansibleInterface: 'agentMachine'
     playbookPathOnAgentMachine: './ansible/update_dependencies.yml'
     inventoriesAgentMachine: 'file'
-    inventoryFileOnAgentMachine: './ansible/p0_inventory'
+    inventoryFileOnAgentMachine: './ansible/p0_inventory.yml'
   displayName: 'Ansible- Update dependencies'
   
 - task: Ansible@0
@@ -54,5 +54,5 @@ steps:
     ansibleInterface: 'agentMachine'
     playbookPathOnAgentMachine: './ansible/test_install.yml'
     inventoriesAgentMachine: 'file'
-    inventoryFileOnAgentMachine: './ansible/p0_inventory'
+    inventoryFileOnAgentMachine: './ansible/p0_inventory.yml'
   displayName: 'Ansible- Test installation'
