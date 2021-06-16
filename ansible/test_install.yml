@@ -42,28 +42,28 @@
       state: file
 
   - name: Run P0 test1 script
-    ansible.builtin.script: ./ansible/test1.sh
+    ansible.builtin.script: ./test1.sh
 
   - name: Test previous run result
     ansible.builtin.file:
       path: ~/project0/Hawkins_P0/Primary/example-1.txt
       state: file
 
-  - name: Run P0 test2 script
-    ansible.builtin.script: ./ansible/test2.sh
+#   - name: Run P0 test2 script
+#     ansible.builtin.script: ./ansible/test2.sh
 
-  - name: Test previous run result
-    ansible.builtin.file:
-      path: ~/project0/Hawkins_P0/Primary/example-2.txt
-      state: file
+#   - name: Test previous run result
+#     ansible.builtin.file:
+#       path: ~/project0/Hawkins_P0/Primary/example-2.txt
+#       state: file
 
-  - name: Run P0 test3 script
-    ansible.builtin.script: ./ansible/test3.sh
+#   - name: Run P0 test3 script
+#     ansible.builtin.script: ./ansible/test3.sh
 
-  - name: Test previous run result
-    ansible.builtin.file:
-      path: ~/project0/Hawkins_P0/Primary/example-3.txt
-      state: file
+#   - name: Test previous run result
+#     ansible.builtin.file:
+#       path: ~/project0/Hawkins_P0/Primary/example-3.txt
+#       state: file
 
-  - name: Run P0 update test script
-    ansible.builtin.script: ./ansible/update_test.sh
+#   - name: Run P0 update test script
+#     ansible.builtin.script: ./ansible/update_test.sh
