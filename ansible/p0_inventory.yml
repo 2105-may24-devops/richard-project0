@@ -1,11 +1,11 @@
 all:
   hosts:
-    # batchvm1:
-    #   host: 13.65.42.214
+    batchvm1:
+      host: 13.65.42.214
     batchvm2:
       host: 104.215.72.107
-    # batchvm3:
-    #   host: 20.97.12.217
+    batchvm3:
+      host: 20.97.12.217
     # batchvm4:
     #   host: 13.84.166.27
     # batchvm5:
