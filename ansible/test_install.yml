@@ -42,7 +42,7 @@
       state: file
 
   - name: Run P0 test1 script
-    ansible.builtin.script: ~/test1.sh
+    ansible.builtin.script: ~/ansible/test1.sh
 
   - name: Test previous run result
     ansible.builtin.file:
@@ -50,7 +50,7 @@
       state: file
 
   - name: Run P0 test2 script
-    ansible.builtin.script: ~/test2.sh
+    ansible.builtin.script: ~/ansible/test2.sh
 
   - name: Test previous run result
     ansible.builtin.file:
@@ -58,7 +58,7 @@
       state: file
 
   - name: Run P0 test3 script
-    ansible.builtin.script: ~/test3.sh
+    ansible.builtin.script: ~/ansible/test3.sh
 
   - name: Test previous run result
     ansible.builtin.file:
@@ -66,33 +66,4 @@
       state: file
 
   - name: Run P0 update test script
-    ansible.builtin.script: ~/update_test.sh
-
-  # - name: Delete Test File 1
-  #   ansible.builtin.file:
-  #     path: ~/project0/Hawkins_P0/Primary/example-1.txt
-  #     state: absent
-
-  # - name: Delete Test File 2
-  #   ansible.builtin.file:
-  #     path: ~/project0/Hawkins_P0/Primary/example-2.txt
-  #     state: absent
-
-  # - name: Delete Test File 3
-  #   ansible.builtin.file:
-  #     path: ~/project0/Hawkins_P0/Primary/example-3.txt
-  #     state: absent
-
-
-
-
-    #  # write output of existing log file to variable
-    #  - name: Write Log To Terminal
-    #    shell: cat ~/project0/Hawkins_P0/Sys/FL.sy
-    #    register: output_contents
-
-    #  #check if all files imported
-    #  - name: Check Hawkins_P0.py
-    #    ansible.builtin.debug:
-    #      msg: "{{  }} "
-    #    when: "'python3' in ansible_facts.packages"
+    ansible.builtin.script: ~/ansible/update_test.sh
