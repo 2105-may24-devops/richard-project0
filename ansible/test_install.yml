@@ -42,7 +42,7 @@
       state: file
 
   - name: Run P0 test1 script
-    ansible.builtin.script: ~/ansible/test1.sh
+    ansible.builtin.script: ./ansible/test1.sh
 
   - name: Test previous run result
     ansible.builtin.file:
@@ -50,7 +50,7 @@
       state: file
 
   - name: Run P0 test2 script
-    ansible.builtin.script: ~/ansible/test2.sh
+    ansible.builtin.script: ./ansible/test2.sh
 
   - name: Test previous run result
     ansible.builtin.file:
@@ -58,7 +58,7 @@
       state: file
 
   - name: Run P0 test3 script
-    ansible.builtin.script: ~/ansible/test3.sh
+    ansible.builtin.script: ./ansible/test3.sh
 
   - name: Test previous run result
     ansible.builtin.file:
@@ -66,4 +66,4 @@
       state: file
 
   - name: Run P0 update test script
-    ansible.builtin.script: ~/ansible/update_test.sh
+    ansible.builtin.script: ./ansible/update_test.sh
