@@ -13,6 +13,8 @@ strategy:
     Python37:
       python.version: '3.7'
 
+steps:
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'Test-P0'
@@ -27,7 +29,6 @@ strategy:
   inputs:
     pollingTimeoutSec: '300'
 
-steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(python.version)'
