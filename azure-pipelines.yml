@@ -29,9 +29,10 @@ steps:
   inputs:
     SonarCloud: 'Test-P0'
     organization: '2105-may24-devops'
-    scannerMode: 'MSBuild'
-    projectKey: '2105-may24-devops_richard-project0'
-    projectName: 'richard-P0'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '2105-may24-devops_richard-project0'
+    cliSources: '.'
 
 - task: SonarCloudAnalyze@1
 
